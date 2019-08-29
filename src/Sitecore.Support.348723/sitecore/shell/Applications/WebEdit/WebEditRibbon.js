@@ -268,20 +268,15 @@ function modalDialogLazyLoading() {
   top.dialogInit = scSitecore.prototype.initializeModalDialogs;
   top.initModalDialog = function (callbackFunc) {
     //sitecore.support.348723
-    if (top !== null) {
-        var jqueryModalDialogsFrame = top.document.getElementById("jqueryModalDialogsFrame");
-    }
+    var jqueryModalDialogsFrame = window.parent.document.getElementById("jqueryModalDialogsFrame");    
     //end of sitecore.support.348723
     if (jqueryModalDialogsFrame) {
       execFunction(callbackFunc);
       return;
     }
-    //sitecore.support.348723
-    if (top !== null) {
-        top.scIsDialogsInitialized = false;
-        top.dialogInit();
-    }
-    //sitecore.support.348723
+
+    top.scIsDialogsInitialized = false;
+    top.dialogInit();
 
     var interval = setInterval(function() { 
       var jqueryModalDialogsFrame = top.document.getElementById("jqueryModalDialogsFrame");
